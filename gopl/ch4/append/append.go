@@ -2,9 +2,9 @@ package main
 
 import "fmt"
 
-func appendInt(x []int, y int) []int {
+func appendInt(x []int, y ...int) []int {
 	var z []int
-	zlen := len(x) + 1
+	zlen := len(x) + len(y)
 	if zlen <= cap(x) {
 		z = x[:zlen]
 	} else {
@@ -15,7 +15,7 @@ func appendInt(x []int, y int) []int {
 		z = make([]int, zlen, zcap)
 		copy(z, x)
 	}
-	z[len(x)] = y
+	copy(z[len(x):], y)
 	return z
 }
 
